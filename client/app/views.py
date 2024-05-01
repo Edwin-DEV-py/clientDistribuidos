@@ -11,9 +11,9 @@ import base64
 
 from client.app.serializers import *
 
-clientUser = Client('http://207.248.81.74:80/users/soap/?wsdl')
-clientFolder = Client('http://207.248.81.74:80/server/soap/?wsdl')
-clientFile= Client('http://207.248.81.74:80/files/soap/?wsdl')
+clientUser = Client('http://172.171.240.20:80/users/soap/?wsdl')
+clientFolder = Client('http://172.171.240.20:80/server/soap/?wsdl')
+clientFile= Client('http://172.171.240.20:80/files/soap/?wsdl')
 
 #region metodos de usuarios
 
