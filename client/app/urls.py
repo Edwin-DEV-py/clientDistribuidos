@@ -6,4 +6,5 @@ urlpatterns = [
     path('carpetas/', FolderView.as_view(), name='carpetas'),
     re_path(r'^carpetas/(?P<folderId>\d+)/$', FolderView.as_view(), name='carpetasPadre'),
     path('archivos/', FileView.as_view(), name='archivos'),
+    path('archivos2/', FileView2.as_view(), name='archivos2'),
 ]

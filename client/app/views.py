@@ -181,6 +181,22 @@ class FileView(APIView):
             response = clientFile.service.process_file(token, file_info["filename"], file_info["filesize"], file_info["encoded_image"], file_info["file_hash"], folder_id)
 
         return Response('yes')
+
+    
+class FileView2(APIView):
+    
+    def put(self, request):
+        
+        fileName = request.data.get('fileName')
+        token = request.headers.get('Authorization')
+        fileId = request.data.get('fileId')
+        folderParent = request.data.get('folderParent')
+        print(request)
+        response = clientFile.service.update_file(token, fileId, fileName, folderParent)
+
+        print(response)
+        
+        return Response('exito')
 #endregion
 
 
