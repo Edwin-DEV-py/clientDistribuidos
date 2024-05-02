@@ -126,13 +126,12 @@ class FolderView(APIView):
         else:
             return Response('mal')
     
-    def delete(self, request):
+    def delete(self, request, folderId):
         
-        token = request.data.get('token')
-        folderId = request.data.get('folderId')
-        
+        token = request.headers.get('Authorization')
+
         eliminar = clientFolder.service.deleteFolderSoap(token, folderId)
-        
+        print(eliminar)
         return Response(eliminar)
 
 def convert_to_serializable(self, obj):
