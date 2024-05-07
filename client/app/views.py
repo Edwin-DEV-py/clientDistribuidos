@@ -134,6 +134,30 @@ class FolderView(APIView):
         print(eliminar)
         return Response(eliminar)
 
+class folder2View(APIView):
+    
+    def get(self, request):
+        token = request.headers.get('Authorization')
+        
+        folders = clientFolder.service.get_all_folders(token)
+        
+        data = []
+        
+        if folders != None:
+            for item in folders:
+                if item['type'] == 'folder':
+                    folder_data = {
+                        'id': item['id'],
+                        'folderName': item['folderName'],
+                    }
+                    data.append(folder_data)
+                    
+        else:
+            data = []
+            
+        print(data)
+        return Response({'data': data,})
+    
 def convert_to_serializable(self, obj):
         if isinstance(obj, dict):
             return {k: self.convert_to_serializable(v) for k, v in obj.items()}
@@ -184,6 +208,13 @@ class FileView(APIView):
     
 class FileView2(APIView):
     
+    def get(self, request, fileId):
+        token = request.headers.get('Authorization')
+        
+        response = clientFile.service.download_file(token, fileId)
+        print(response)
+        return Response('exito')
+    
     def put(self, request):
         
         fileName = request.data.get('fileName')
@@ -194,6 +225,14 @@ class FileView2(APIView):
         response = clientFile.service.update_file(token, fileId, fileName, folderParent)
 
         print(response)
+        
+        return Response('exito')
+    
+    def delete(self,request, fileId):
+        
+        token = request.headers.get('Authorization')
+        
+        response = clientFile.service.delete_file(token, fileId)
         
         return Response('exito')
 #endregion
