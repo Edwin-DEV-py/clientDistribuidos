@@ -212,8 +212,8 @@ class FileView2(APIView):
         token = request.headers.get('Authorization')
         
         response = clientFile.service.download_file(token, fileId)
-        print(response)
-        return Response('exito')
+        
+        return Response(response)
     
     def put(self, request):
         
