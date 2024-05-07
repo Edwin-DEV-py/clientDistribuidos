@@ -213,7 +213,14 @@ class FileView2(APIView):
         
         response = clientFile.service.download_file(token, fileId)
         
-        return Response(response)
+        if isinstance(response, str):
+            response_dict = json.loads(response)
+        else:
+            response_dict = response
+            
+        file_paths = response_dict.get('file_paths', [])
+        
+        return Response(file_paths)
     
     def put(self, request):
         
